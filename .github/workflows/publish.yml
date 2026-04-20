@@ -1,0 +1,30 @@
+name: Publish Python Package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          export PATH="$HOME/.local/bin:$PATH"
+      - name: Build package
+        run: poetry build
+      - name: Configure Poetry for GitHub Packages
+        run: |
+          poetry config repositories.github https://pypi.pkg.github.com/${{ github.repository_owner }}
+          poetry config http-basic.github ${{ github.actor }} ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish to GitHub Packages
+        run: poetry publish --repository github
