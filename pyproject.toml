@@ -1,6 +1,6 @@
 [project]
 name = "my-db-handler"
-version = "0.1.0"
+version = "0.1.1"
 description = "Közös adatbázis és tároló kezelő modul (PostgreSQL & MinIO)"
 authors = [
     {name = "Zoltan Pinter", email = "pizoli82@gmail.com"}
