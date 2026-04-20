@@ -25,8 +25,9 @@ jobs:
 
       - name: Publish to GitHub Packages
         env:
-          # A github.repository tartalmazza a 'pizoli/my-db-handler' részt
-          POETRY_REPOSITORIES_GITHUB_URL: https://pypi.pkg.github.com/${{ github.repository }}
-          POETRY_HTTP_BASIC_GITHUB_USERNAME: ${{ github.actor }}
-          POETRY_HTTP_BASIC_GITHUB_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-        run: poetry publish --repository github -v
+          TWINE_USERNAME: ${{ github.actor }}
+          TWINE_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          TWINE_REPOSITORY_URL: https://pypi.pkg.github.com/${{ github.repository_owner }}/
+        run: |
+          pip install twine
+          twine upload --repository-url $TWINE_REPOSITORY_URL dist/* --verbose
