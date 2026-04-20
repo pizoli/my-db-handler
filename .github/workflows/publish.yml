@@ -24,7 +24,7 @@ jobs:
         run: poetry build
       - name: Configure Poetry for GitHub Packages
         run: |
-          poetry config repositories.github https://pypi.pkg.github.com/${{ github.repository_owner }}
-          poetry config http-basic.github ${{ github.actor }} ${{ secrets.GITHUB_TOKEN }}
+          poetry config repositories.github https://pypi.pkg.github.com/${{ github.repository_owner }}/
+          poetry config http-basic.github ${{ github.repository_owner }} ${{ secrets.GITHUB_TOKEN }}
       - name: Publish to GitHub Packages
-        run: poetry publish --repository github
+        run: poetry publish --repository github -v
