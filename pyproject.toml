@@ -3,7 +3,7 @@ name = "my-db-handler"
 version = "0.1.0"
 description = "Közös adatbázis és tároló kezelő modul (PostgreSQL & MinIO)"
 authors = [
-    {name = "Zoltan Pinter",email = "pizoli@outlook.hu"}
+    {name = "Zoltan Pinter", email = "pizoli82@gmail.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.12"
