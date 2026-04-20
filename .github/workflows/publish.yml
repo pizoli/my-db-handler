@@ -22,9 +22,11 @@ jobs:
           export PATH="$HOME/.local/bin:$PATH"
       - name: Build package
         run: poetry build
-      - name: Configure Poetry for GitHub Packages
-        run: |
-          poetry config repositories.github https://pypi.pkg.github.com/${{ github.repository_owner }}/
-          poetry config http-basic.github ${{ github.repository_owner }} ${{ secrets.GITHUB_TOKEN }}
+
       - name: Publish to GitHub Packages
+        env:
+          # Környezeti változók használata a konfiguráció helyett
+          POETRY_REPOSITORIES_GITHUB_URL: https://pypi.pkg.github.com/${{ github.repository_owner }}
+          POETRY_HTTP_BASIC_GITHUB_USERNAME: ${{ github.actor }}
+          POETRY_HTTP_BASIC_GITHUB_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: poetry publish --repository github -v
