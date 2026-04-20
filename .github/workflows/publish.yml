@@ -25,9 +25,9 @@ jobs:
 
       - name: Publish to GitHub Packages
         env:
-          TWINE_USERNAME: ${{ github.actor }}
-          TWINE_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-          TWINE_REPOSITORY_URL: https://pypi.pkg.github.com/${{ github.repository_owner }}/
+          TWINE_USERNAME: ${{ github.repository_owner }}
+          TWINE_PASSWORD: ${{ secrets.GH_PACKAGES_TOKEN }} # Ez hivatkozik a secret-re
+          TWINE_REPOSITORY_URL: https://pypi.pkg.github.com/${{ github.repository_owner }}
         run: |
           pip install twine
           twine upload --repository-url $TWINE_REPOSITORY_URL dist/* --verbose
